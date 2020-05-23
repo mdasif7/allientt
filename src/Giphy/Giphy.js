@@ -48,7 +48,6 @@ export default class Giphy extends Component {
   onSearchChange = value => {
     this.setState({ searchValue: value });
   };
-
   onSearchChangeEditor = value => {
     //   let fliterValue= this.removeTags(value)
       this.setState({ quillText: value });
