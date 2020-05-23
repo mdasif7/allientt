@@ -25,7 +25,7 @@ class ImgComponent extends Component {
       <>
         Number of images displayed {imagesList.length ? imagesList.length : 0 }
        <div  className='image-section'>
-           {  imagesList && imagesList.map(item => {
+           {  imagesList && imagesList.length > 0 && imagesList.map(item => {
         return(
             item && (<img className='gif-images'src={item.images.downsized.url} alt="no" />)
         ) 

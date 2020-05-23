@@ -55,6 +55,7 @@ export default class Giphy extends Component {
   submitSearch = () => {
     const { searchValue, limit } = this.state;
     console.log(limit);
+    this.setState({imagesList:{}})
     let url = "https://api.giphy.com/v1/gifs/search?";
     Axios.get(
       `${url}q=${searchValue}&api_key=FBlz9tSvI7fI517pqwDxIuRSK5n5AIMq&limit=${limit}`
