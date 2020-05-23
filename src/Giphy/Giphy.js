@@ -65,11 +65,14 @@ export default class Giphy extends Component {
     });
   };
   LoadMore = () => {
-    const { count, limit } = this.state;
+    const { count, limit, imagesList } = this.state;
     let incLimit = limit + 18;
-    this.setState({ limit: incLimit, count: count + 1 }, () => {
-      this.submitSearch();
-    });
+    if(imagesList.length >0){
+      this.setState({ limit: incLimit, count: count + 1 }, () => {
+        this.submitSearch();
+      });
+    }
+    
   };
   reset = () => {
     this.setState({
