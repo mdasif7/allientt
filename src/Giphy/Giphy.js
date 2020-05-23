@@ -52,13 +52,17 @@ export default class Giphy extends Component {
       this.setState({ quillText: value });
   };
 
-  submitSearch = () => {
+  submitSearch = (val) => {
     const { searchValue, limit } = this.state;
     console.log(limit);
-    this.setState({imagesList:{}})
+    let pagelimit=limit;
+    if(!(val==="load")){
+      this.setState({imagesList:{}, limit: 18, count:1})
+      pagelimit=18;
+    }
     let url = "https://api.giphy.com/v1/gifs/search?";
     Axios.get(
-      `${url}q=${searchValue}&api_key=FBlz9tSvI7fI517pqwDxIuRSK5n5AIMq&limit=${limit}`
+      `${url}q=${searchValue}&api_key=FBlz9tSvI7fI517pqwDxIuRSK5n5AIMq&limit=${pagelimit}`
     ).then(res => {
       console.log(res.data.data);
       this.setState({ imagesList: res.data.data });
@@ -69,7 +73,7 @@ export default class Giphy extends Component {
     let incLimit = limit + 18;
     if(imagesList.length >0){
       this.setState({ limit: incLimit, count: count + 1 }, () => {
-        this.submitSearch();
+        this.submitSearch("load");
       });
     }
     
@@ -109,7 +113,7 @@ export default class Giphy extends Component {
             onChange={value => this.onSearchChangeEditor(value)}
           />
           <div className="button-section">
-            <Button onClick={() => this.submitSearch()}>Submit</Button>
+            <Button onClick={() => this.submitSearch('submit')}>Submit</Button>
             <Button onClick={() => this.LoadMore()}>LoadMore </Button>
             <Button onClick={() => this.reset()}>Reset</Button>
           </div>
