@@ -17,7 +17,7 @@ export default class Giphy extends Component {
       modules: {
         toolbar: [
           [{ header: [1, 2, false] }],
-          ["bold", "italic", "underline", "strike", "blockquote", "GFGGGGG"],
+          ["bold", "italic", "underline", "strike", "blockquote"],
           [
             { list: "ordered" },
             { list: "bullet" },
@@ -35,7 +35,6 @@ export default class Giphy extends Component {
         "underline",
         "strike",
         "blockquote",
-        "italic",
         "list",
         "bullet",
         "indent",
@@ -66,7 +65,7 @@ export default class Giphy extends Component {
   };
   LoadMore = () => {
     const { count, limit } = this.state;
-    let incLimit = limit * (count + 1);
+    let incLimit = limit + 18;
     this.setState({ limit: incLimit, count: count + 1 }, () => {
       this.submitSearch();
     });
@@ -88,10 +87,10 @@ export default class Giphy extends Component {
 //     return str.replace( /(<([^>]+)>)/ig, '');
 //  }
   render() {
-    const { imagesList, searchValue, modules, formats,quillText } = this.state;
+    const { imagesList, searchValue, modules, formats,quillText, limit } = this.state;
     return (
       <div className="main-giphy">
-        <div class="search-section">
+        <div className="search-section">
             Search Value: 
           <Input
             className="search-value"
@@ -111,7 +110,7 @@ export default class Giphy extends Component {
             <Button onClick={() => this.reset()}>Reset</Button>
           </div>
         </div>
-
+        <p>Page Display Limit: {limit} </p>
         <ImgComponent imagesList={imagesList} />
       </div>
     );

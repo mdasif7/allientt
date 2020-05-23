@@ -22,7 +22,9 @@ class ImgComponent extends Component {
         props: { imagesList }
       } = this;
     return (
-        <div  className='image-section'>
+      <>
+        Number of images displayed {imagesList.length ? imagesList.length : 0 }
+       <div  className='image-section'>
            {  imagesList && imagesList.map(item => {
         return(
             item && (<img className='gif-images'src={item.images.downsized.url} alt="no" />)
@@ -30,6 +32,8 @@ class ImgComponent extends Component {
       })}
       {imagesList.length === 0 && (<div>No Images</div>)}  
         </div>
+      </>
+       
     )
   }
 }

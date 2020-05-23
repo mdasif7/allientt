@@ -6,6 +6,7 @@
   height: 1000px;
 }
 .button-section{
+  border-bottom: 1px solId black;
   button{
     margin: 8px;
   }
@@ -30,6 +31,9 @@
   min-width: 500px;
   max-height: 500px;
   overflow-y: scroll; 
+  border: 1px solid #000;
+  margin: 10px;
+  min-height: 100px;
   img.gif-images {
     width: 200px;
     height: 200px;
