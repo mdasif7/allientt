@@ -1,12 +1,27 @@
 .App {
   text-align: center;
+  
+}
+body {
+  color: #000000;
+}
+.modals.dimmer .ui.scrolling.modal {
+ div, span, p {
+   color: #000000;
+ }
 }
 
 .main-giphy{
-  height: 1000px;
+  height: auto;
+  margin-bottom: 20px;
+}
+.text-editor {
+  width: 800px;
+  margin: auto;
 }
 .button-section{
-  border-bottom: 1px solId black;
+  margin-top: 15px;
+  margin-bottom: 5px;
   button{
     margin: 8px;
   }
@@ -34,10 +49,27 @@
   border: 1px solid #000;
   margin: 10px;
   min-height: 100px;
+  width: 813px;
+  margin: auto;
+  margin-top: 5px;
   img.gif-images {
     width: 200px;
     height: 200px;
     
   }
   
+}
+
+.popupModal{
+  width: 400px;
+  height: 400px;
+}
+.ui.basic.modal>.actions, .ui.basic.modal>.content, .ui.basic.modal>.header {
+  background-color: white !important;
+}
+.ui.basic.modal>.header {
+  color: black !important;
+}
+.ui.small.modal {
+  width: 850px !important;
 }

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Input, Button } from "semantic-ui-react";
 import Axios from "axios";
 import ImgComponent from "./ImgComponent";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 export default class Giphy extends Component {
@@ -14,44 +13,13 @@ export default class Giphy extends Component {
       limit: 18,
       count: 1,
       quillText:'',
-      modules: {
-        toolbar: [
-          [{ header: [1, 2, false] }],
-          ["bold", "italic", "underline", "strike", "blockquote"],
-          [
-            { list: "ordered" },
-            { list: "bullet" },
-            { indent: "-1" },
-            { indent: "+1" }
-          ],
-          ["link", "image"],
-          ["clean"]
-        ]
-      },
-      formats: [
-        "header",
-        "bold",
-        "italic",
-        "underline",
-        "strike",
-        "blockquote",
-        "list",
-        "bullet",
-        "indent",
-        "link",
-        "image"
-      ]
+     
     };
   }
 
   onSearchChange = value => {
     this.setState({ searchValue: value });
   };
-  onSearchChangeEditor = value => {
-    //   let fliterValue= this.removeTags(value)
-      this.setState({ quillText: value });
-  };
-
   submitSearch = (val) => {
     const { searchValue, limit } = this.state;
     console.log(limit);
@@ -67,7 +35,7 @@ export default class Giphy extends Component {
       console.log(res.data.data);
       this.setState({ imagesList: res.data.data });
     });
-  };
+  }; 
   LoadMore = () => {
     const { count, limit, imagesList } = this.state;
     let incLimit = limit + 18;
@@ -95,22 +63,16 @@ export default class Giphy extends Component {
 //     return str.replace( /(<([^>]+)>)/ig, '');
 //  }
   render() {
-    const { imagesList, searchValue, modules, formats,quillText, limit } = this.state;
+    const { imagesList, searchValue, limit } = this.state;
+    const {imageClick}=this.props;
     return (
       <div className="main-giphy">
         <div className="search-section">
-            Search Value: 
+            <span>Search Value: </span>
           <Input
             className="search-value"
             onChange={e => this.onSearchChange(e.target.value)}
             value={searchValue}
-          />
-          <p>Editor Text:{quillText}</p>
-          <ReactQuill
-            value={quillText}
-            modules={modules}
-            formats={formats}
-            onChange={value => this.onSearchChangeEditor(value)}
           />
           <div className="button-section">
             <Button onClick={() => this.submitSearch('submit')}>Submit</Button>
@@ -119,8 +81,11 @@ export default class Giphy extends Component {
           </div>
         </div>
         <p>Page Display Limit: {limit} </p>
-        <ImgComponent imagesList={imagesList} />
+        <ImgComponent imagesList={imagesList} imageClick={  imageClick }/>
       </div>
     );
   }
 }
+Giphy.defaultProps = {
+  imageClick: () => {}
+  };
