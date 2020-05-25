@@ -13,7 +13,8 @@ const CustomHeart = ({handleOpen}) => (
 );
 
 function insertHeart() {
-//   const cursorPosition = this.quill.getSelection().index;
+  // console.log(this.quillRef, this.quill)
+  // const cursorPosition = this.quill.getSelection().index;
 //   this.quill.insertText(cursorPosition, "♥");
 //   this.quill.setSelection(cursorPosition + 1);
 }
@@ -114,18 +115,24 @@ class Editor extends React.Component {
 }
 
 imageClick = (value) => {
-    const {imagesList}=this.state;
+    const {imagesList, editorHtml }=this.state;
     let imagearry=imagesList;
+    let imginsert= `<img src=${value.images.downsized.url} alt="No"/>`
+    let presentImg=editorHtml + imginsert;
     imagearry.push(value);
-    this.setState({imageValue: value, imagesList: imagearry, modalOpen:false})
+    this.setState({imageValue: value, imagesList: imagearry, modalOpen:false, editorHtml: presentImg})
+    insertHeart(value)
 }
   render() {
-      const {modalOpen, imagesList}=this.state;
+      const {modalOpen, 
+        //imagesList
+      }=this.state;
     return (
       <>
         <div className="text-editor">
           <CustomToolbar handleOpen={()=>this.handleOpen()} />
           <ReactQuill
+          ref={(el) => this.quillRef = el}
             value={this.state.editorHtml}
             onChange={this.handleChange}
             placeholder={this.props.placeholder}
@@ -136,7 +143,7 @@ imageClick = (value) => {
         <ModalPopup modalOpen={modalOpen} handleClose={this.handleClose} handleOpen={this.handleOpen}>
           <Giphy imageClick={this.imageClick }/>
         </ModalPopup>
-        <ImgComponent imagesList={imagesList}/>
+        {/* <ImgComponent imagesList={imagesList}/> */}
      </>
     );
   }
